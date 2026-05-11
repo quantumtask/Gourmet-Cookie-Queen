@@ -138,39 +138,48 @@
 
   @media (max-width: 760px) {
     .nav-toggle { display: block; }
+    /* Lift the whole nav (and its menu child) above the FAB while open */
+    body.nav-open .nav { z-index: 80; }
+    body.nav-open .fab { opacity: 0; pointer-events: none; transform: translateY(20px); }
+
     .nav-links {
-      position: fixed;
-      inset: 64px 0 0 0;
-      z-index: 70;
+      position: absolute;
+      top: 100%;            /* sit directly below the nav, regardless of marquee */
+      left: 0;
+      right: 0;
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
       flex-direction: column;
       align-items: stretch;
       gap: 0;
-      padding: 24px;
-      background: rgba(255,250,245,0.98);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      padding: 18px 20px 24px;
+      background: #fff;
+      box-shadow: 0 24px 40px -16px rgba(193,45,111,.25);
       border-top: 1px solid var(--pink-100);
-      transform: translateY(-10px);
+      border-bottom: 1px solid var(--pink-100);
+      transform: translateY(-8px);
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: transform .25s ease, opacity .25s ease;
-      overflow-y: auto;
+      transition: transform .22s ease, opacity .22s ease, visibility .22s ease;
     }
-    body.nav-open .fab { opacity: 0; pointer-events: none; transform: translateY(20px); }
     body.nav-open .nav-links {
       transform: translateY(0);
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
     }
     .nav-links a:not(.nav-cta) {
-      padding: 18px 8px;
-      font-size: 18px;
+      padding: 16px 4px;
+      font-size: 17px;
+      color: var(--ink);
       border-bottom: 1px solid var(--pink-100);
     }
+    .nav-links a:not(.nav-cta):last-of-type { border-bottom: 0; }
     .nav-links .nav-cta {
-      margin-top: 18px;
+      margin-top: 14px;
       justify-content: center;
-      padding: 16px 24px;
+      padding: 14px 24px;
       font-size: 16px;
     }
   }
@@ -1046,13 +1055,13 @@
 <!-- Announcement bar -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Now booking summer 2026 events</span>
-    <span>Free local delivery on orders over $100</span>
-    <span>Ships fresh nationwide in 2 business days</span>
+    <span>Now booking 2026 events</span>
+    <span>📞 072 512 8815</span>
+    <span>Follow @gourmetcookiequeen on Instagram</span>
     <span>Custom designs · 100% from scratch</span>
-    <span>Now booking summer 2026 events</span>
-    <span>Free local delivery on orders over $100</span>
-    <span>Ships fresh nationwide in 2 business days</span>
+    <span>Now booking 2026 events</span>
+    <span>📞 072 512 8815</span>
+    <span>Follow @gourmetcookiequeen on Instagram</span>
     <span>Custom designs · 100% from scratch</span>
   </div>
 </div>
@@ -1392,9 +1401,9 @@
       <div>
         <h5>Follow</h5>
         <ul>
-          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://www.instagram.com/gourmetcookiequeen/" target="_blank" rel="noopener">Instagram @gourmetcookiequeen</a></li>
+          <li><a href="https://www.facebook.com/gourmetcookiequeen" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="tel:+27725128815">📞 072 512 8815</a></li>
         </ul>
       </div>
     </div>
@@ -1469,7 +1478,7 @@
           <textarea id="f-details" name="details" placeholder="e.g. 'Strawberry first birthday — pink, red, white, gold accents. Will send Pinterest board.'"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send Request →</button>
-        <p class="modal-note">Or email us directly: hello@gourmetcookiequeen.com</p>
+        <p class="modal-note">Prefer to chat? <a href="tel:+27725128815" style="color:var(--pink-600); font-weight:600; text-decoration:none;">Call 072 512 8815</a> · <a href="https://wa.me/27725128815" target="_blank" rel="noopener" style="color:var(--pink-600); font-weight:600; text-decoration:none;">WhatsApp</a></p>
       </form>
     </div>
     <div id="modal-success" class="form-success" style="display:none;">
