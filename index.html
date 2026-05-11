@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gourmet Cookie Queen — Custom Hand-Decorated Sugar Cookies</title>
+<meta name="description" content="Stunning hand-decorated sugar cookies for birthdays, baby showers, weddings, and corporate events. Custom designs delivered fresh. Order yours today." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --pink-50:#fff5f8;
+    --pink-100:#ffe6ef;
+    --pink-200:#fbc9dc;
+    --pink-300:#f49ec0;
+    --pink-400:#ec6fa3;
+    --pink-500:#e0468a;
+    --pink-600:#c12d6f;
+    --cream:#fffaf5;
+    --ink:#2a1a23;
+    --ink-soft:#5b4751;
+    --gold:#d4a857;
+    --shadow:0 20px 50px -20px rgba(193,45,111,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    box-shadow: 0 12px 30px -10px rgba(224,70,138,.65);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -10px rgba(224,70,138,.8); }
+  .btn-ghost {
+    background: #fff;
+    color: var(--pink-600);
+    border: 2px solid var(--pink-200);
+  }
+  .btn-ghost:hover { background: var(--pink-50); border-color: var(--pink-400); }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,250,245,0.85);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid rgba(244,158,192,.25);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+  .brand-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; letter-spacing: .3px; }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: var(--pink-600); }
+  .nav-cta { padding: 10px 20px; font-size: 14px; }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 10px;
+    margin-right: -10px;
+    cursor: pointer;
+    border-radius: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle span + span { margin-top: 6px; }
+  body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  @media (max-width: 760px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      inset: 64px 0 0 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 24px;
+      background: rgba(255,250,245,0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--pink-100);
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .25s ease, opacity .25s ease;
+      overflow-y: auto;
+    }
+    body.nav-open .nav-links {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .nav-links a:not(.nav-cta) {
+      padding: 18px 8px;
+      font-size: 18px;
+      border-bottom: 1px solid var(--pink-100);
+    }
+    .nav-links .nav-cta {
+      margin-top: 18px;
+      justify-content: center;
+      padding: 16px 24px;
+      font-size: 16px;
+    }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 80px 0 100px;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 500px at 90% -10%, rgba(244,158,192,.35), transparent 60%),
+      radial-gradient(700px 400px at -10% 30%, rgba(255,230,239,.7), transparent 60%),
+      linear-gradient(180deg, #fff7fa 0%, var(--cream) 100%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: var(--pink-600);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--pink-200);
+    box-shadow: 0 6px 20px -10px rgba(224,70,138,.4);
+  }
+  .eyebrow .dot { width:8px; height:8px; border-radius:50%; background:var(--pink-500); }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.05;
+    font-weight: 800;
+    margin: 22px 0 18px;
+    color: var(--ink);
+  }
+  .hero h1 .script {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    color: var(--pink-500);
+    font-size: 1.15em;
+  }
+  .hero p.lead {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 32px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+  .hero-meta div {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-meta strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--pink-600);
+  }
+  .hero-meta span {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1/1;
+    transform: rotate(2deg);
+  }
+  .hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: -22px;
+    left: -22px;
+    background: #fff;
+    padding: 16px 22px;
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: rotate(-3deg);
+    z-index: 2;
+  }
+  .hero-badge img { width: 56px; height: 56px; border-radius: 50%; }
+  .hero-badge .b-title { font-family: 'Dancing Script', cursive; color: var(--pink-600); font-size: 22px; line-height: 1; }
+  .hero-badge .b-sub { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 1px; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { transform: none; max-width: 480px; margin: 0 auto; }
+  }
+
+  /* ---------- Trust strip ---------- */
+  .trust {
+    background: #fff;
+    border-top: 1px solid var(--pink-100);
+    border-bottom: 1px solid var(--pink-100);
+    padding: 28px 0;
+  }
+  .trust-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .trust-item .icon { font-size: 28px; }
+  .trust-item h4 { font-size: 15px; font-weight: 600; }
+  .trust-item p { font-size: 13px; color: var(--ink-soft); }
+  @media (max-width: 760px) { .trust-inner { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- Section base ---------- */
+  section.block { padding: 100px 0; }
+  .section-head { text-align: center; max-width: 700px; margin: 0 auto 56px; }
+  .section-eyebrow {
+    color: var(--pink-500);
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    line-height: 1;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4.5vw, 46px);
+    font-weight: 700;
+    margin: 8px 0 14px;
+    line-height: 1.15;
+  }
+  .section-head p { color: var(--ink-soft); font-size: 17px; }
+
+  /* ---------- Video showcase ---------- */
+  .video-section {
+    background: linear-gradient(180deg, var(--cream) 0%, #fff0f6 100%);
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    align-items: center;
+  }
+  .video-copy h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .video-copy h2 span { color: var(--pink-500); font-family: 'Dancing Script', cursive; }
+  .video-copy p { color: var(--ink-soft); font-size: 17px; margin-bottom: 28px; }
+  .video-bullets { list-style: none; display: grid; gap: 14px; margin-bottom: 32px; }
+  .video-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 16px;
+  }
+  .video-bullets li::before {
+    content: "🍪";
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .video-wrap {
+    background: #fff;
+    padding: 14px;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    justify-self: center;
+    width: fit-content;
+  }
+  .video-wrap iframe { border-radius: 18px; display: block; }
+  @media (max-width: 900px) {
+    .video-grid { grid-template-columns: 1fr; gap: 40px; }
+    .video-wrap { justify-self: center; }
+  }
+
+  /* ---------- Offerings ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 32px 28px;
+    border: 1px solid var(--pink-100);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+    border-color: var(--pink-200);
+  }
+  .card .emoji {
+    font-size: 38px;
+    background: var(--pink-50);
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .card p { color: var(--ink-soft); font-size: 15px; }
+  @media (max-width: 800px) { .cards { grid-template-columns: 1fr; } }
+
+  /* ---------- Gallery / Feature image ---------- */
+  .feature {
+    background: var(--pink-50);
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .feature-image {
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .feature-image img { width: 100%; height: 100%; object-fit: cover; }
+  .feature h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .feature p { color: var(--ink-soft); font-size: 17px; margin-bottom: 26px; }
+  .feature-list { display: grid; gap: 18px; }
+  .feature-list .row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .feature-list .num {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-400), var(--pink-600));
+    color: #fff;
+    font-weight: 700;
+    display: grid; place-items: center;
+    font-family: 'Playfair Display', serif;
+  }
+  .feature-list h4 { font-size: 17px; margin-bottom: 4px; }
+  .feature-list p { font-size: 15px; margin: 0; }
+  @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials .cards { grid-template-columns: repeat(3, 1fr); }
+  .testimonial {
+    background: #fff;
+    border-radius: 24px;
+    padding: 30px;
+    border: 1px solid var(--pink-100);
+    position: relative;
+  }
+  .stars { color: var(--gold); margin-bottom: 14px; letter-spacing: 2px; }
+  .testimonial blockquote {
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+  .who {
+    display: flex; align-items: center; gap: 12px;
+    border-top: 1px solid var(--pink-100);
+    padding-top: 18px;
+  }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-300), var(--pink-500));
+    color: #fff; display: grid; place-items: center; font-weight: 700;
+  }
+  .who strong { display:block; font-size: 15px; }
+  .who span { font-size: 13px; color: var(--ink-soft); }
+  @media (max-width: 800px) { .testimonials .cards { grid-template-columns: 1fr; } }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap { max-width: 780px; margin: 0 auto; }
+  .faq {
+    background: #fff;
+    border: 1px solid var(--pink-100);
+    border-radius: 18px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  .faq[open] { border-color: var(--pink-300); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 26px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    font-size: 28px;
+    color: var(--pink-500);
+    line-height: 1;
+    transition: transform .2s ease;
+  }
+  .faq[open] summary::after { content: "−"; }
+  .faq p {
+    padding: 0 26px 22px;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner {
+    background:
+      linear-gradient(135deg, rgba(193,45,111,.94), rgba(236,111,163,.92)),
+      url('bg%20cookie%20queen.jpg') center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 90px 24px;
+    border-radius: 32px;
+    max-width: 1152px;
+    margin: 0 24px 100px;
+    box-shadow: var(--shadow);
+  }
+  @media (min-width: 1200px) {
+    .cta-banner { margin-left: auto; margin-right: auto; }
+  }
+  .cta-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 50px);
+    margin-bottom: 14px;
+    line-height: 1.1;
+  }
+  .cta-banner h2 span { font-family: 'Dancing Script', cursive; font-weight: 700; }
+  .cta-banner p { font-size: 18px; opacity: .95; max-width: 600px; margin: 0 auto 30px; }
+  .cta-banner .btn-primary {
+    background: #fff;
+    color: var(--pink-600);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,.35);
+  }
+  .cta-banner .btn-primary:hover { background: var(--pink-50); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: #1d1118;
+    color: #f3dce6;
+    padding: 60px 0 30px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .foot-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .foot-brand img { width: 52px; height: 52px; border-radius: 50%; }
+  .foot-brand span { font-family: 'Playfair Display', serif; font-size: 20px; }
+  footer p { color: #d6b5c5; font-size: 14px; max-width: 320px; }
+  footer h5 { font-size: 15px; margin-bottom: 14px; color: #fff; }
+  footer ul { list-style: none; display: grid; gap: 8px; }
+  footer ul a { color: #d6b5c5; text-decoration: none; font-size: 14px; }
+  footer ul a:hover { color: var(--pink-300); }
+  .foot-bottom {
+    border-top: 1px solid #3a2530;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #b89aaa;
+  }
+  @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 500px) { .foot-grid { grid-template-columns: 1fr; } }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* =========================================================
+     MOBILE OVERRIDES — phones (<=760px) and very small (<=420px)
+     ========================================================= */
+  @media (max-width: 760px) {
+    .container { padding: 0 20px; }
+
+    /* Buttons — full width, big tap targets */
+    .btn { padding: 16px 24px; font-size: 15px; }
+    .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; width: 100%; }
+    .hero-ctas .btn { justify-content: center; width: 100%; }
+
+    /* Nav */
+    .nav-inner { padding: 12px 20px; }
+    .brand img { width: 40px; height: 40px; }
+    .brand-text { font-size: 16px; }
+
+    /* Hero */
+    .hero { padding: 48px 0 72px; }
+    .hero-grid { gap: 36px; }
+    .hero h1 { font-size: clamp(36px, 9vw, 48px); margin: 18px 0 14px; }
+    .hero p.lead { font-size: 16.5px; margin-bottom: 28px; }
+    .eyebrow { font-size: 11.5px; padding: 7px 14px; letter-spacing: 1px; }
+
+    .hero-visual { max-width: 100%; }
+    .hero-visual img { border-radius: 24px; }
+    .hero-badge {
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      padding: 12px 18px;
+      border-radius: 18px;
+    }
+    .hero-badge img { width: 44px; height: 44px; }
+    .hero-badge .b-title { font-size: 18px; }
+    .hero-badge .b-sub { font-size: 10.5px; letter-spacing: .8px; }
+
+    .hero-meta {
+      gap: 0;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--pink-100);
+      justify-content: space-between;
+    }
+    .hero-meta div { flex: 1; text-align: center; }
+    .hero-meta strong { font-size: 24px; }
+    .hero-meta span { font-size: 11px; letter-spacing: .8px; }
+
+    /* Trust strip */
+    .trust { padding: 22px 0; }
+    .trust-inner { gap: 18px 14px; }
+    .trust-item .icon { font-size: 24px; }
+    .trust-item h4 { font-size: 14px; }
+    .trust-item p { font-size: 12.5px; }
+
+    /* Section spacing */
+    section.block { padding: 64px 0; }
+    .section-head { margin-bottom: 40px; }
+    .section-head h2 { font-size: clamp(26px, 7vw, 34px); }
+    .section-head p { font-size: 15.5px; }
+    .section-eyebrow { font-size: 24px; }
+
+    /* Video section */
+    .video-grid { gap: 32px; }
+    .video-copy h2 { font-size: clamp(26px, 7vw, 32px); }
+    .video-copy p { font-size: 15.5px; margin-bottom: 22px; }
+    .video-bullets li { font-size: 15px; }
+    .video-copy .btn { width: 100%; justify-content: center; }
+    .video-wrap { padding: 10px; border-radius: 22px; }
+    .video-wrap iframe { border-radius: 14px; }
+
+    /* Cards */
+    .cards { gap: 16px; }
+    .card { padding: 24px 22px; border-radius: 20px; }
+    .card .emoji { width: 60px; height: 60px; font-size: 30px; border-radius: 16px; margin-bottom: 16px; }
+    .card h3 { font-size: 19px; }
+    .card p { font-size: 14.5px; }
+
+    /* Feature block */
+    .feature-grid { gap: 32px; }
+    .feature h2 { font-size: clamp(26px, 7vw, 34px); }
+    .feature p { font-size: 15.5px; margin-bottom: 22px; }
+    .feature-list { gap: 14px; }
+    .feature-list .num { width: 34px; height: 34px; font-size: 15px; }
+    .feature-list h4 { font-size: 16px; }
+    .feature-list p { font-size: 14.5px; }
+    .feature-image { border-radius: 22px; }
+
+    /* Testimonials */
+    .testimonial { padding: 24px 22px; border-radius: 20px; }
+    .testimonial blockquote { font-size: 15px; margin-bottom: 18px; }
+
+    /* FAQ */
+    .faq summary { padding: 18px 20px; font-size: 15.5px; }
+    .faq summary::after { font-size: 24px; }
+    .faq p { padding: 0 20px 18px; font-size: 14.5px; }
+
+    /* CTA banner */
+    .cta-banner {
+      padding: 56px 24px;
+      border-radius: 24px;
+      margin: 0 20px 64px;
+    }
+    .cta-banner h2 { font-size: clamp(26px, 7vw, 34px); }
+    .cta-banner p { font-size: 16px; margin-bottom: 26px; }
+    .cta-banner .btn { width: 100%; justify-content: center; }
+
+    /* Footer */
+    footer { padding: 48px 0 24px; }
+    .foot-grid { gap: 28px; margin-bottom: 32px; }
+    .foot-brand img { width: 44px; height: 44px; }
+    .foot-brand span { font-size: 18px; }
+  }
+
+  /* Very small phones (iPhone SE, etc.) */
+  @media (max-width: 420px) {
+    .container { padding: 0 18px; }
+    .nav-inner { padding: 12px 18px; }
+    .brand-text { font-size: 15px; }
+    .hero h1 { font-size: 34px; }
+    .hero-meta { gap: 0; }
+    .hero-meta strong { font-size: 21px; }
+    .hero-badge { padding: 10px 14px; }
+    .hero-badge img { width: 38px; height: 38px; }
+    .hero-badge .b-title { font-size: 16px; }
+    .trust-inner { grid-template-columns: 1fr 1fr; gap: 16px 12px; }
+    section.block { padding: 56px 0; }
+    .cta-banner { padding: 48px 20px; margin: 0 16px 56px; }
+  }
+
+  /* Prevent body scroll when mobile menu open */
+  body.nav-open { overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="cookie%20logo.jpg" alt="Gourmet Cookie Queen logo" />
+      <span class="brand-text">Gourmet Cookie Queen</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="nav-links">
+      <a href="#offerings">Cookies</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#how">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#order" class="btn btn-primary nav-cta">Order Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Hand-decorated · Made fresh to order</span>
+      <h1>Cookies <span class="script">almost</span> too pretty to eat.</h1>
+      <p class="lead">
+        Custom sugar cookies designed for your moment — birthdays, baby showers, weddings, and brand activations. Every detail piped by hand, every bite worth the occasion.
+      </p>
+      <div class="hero-ctas">
+        <a href="#order" class="btn btn-primary">Request a Quote →</a>
+        <a href="#gallery" class="btn btn-ghost">See the Gallery</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>500+</strong><span>Events Served</span></div>
+        <div><strong>4.9★</strong><span>Average Review</span></div>
+        <div><strong>100%</strong><span>Made From Scratch</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="bg%20cookie%20queen.jpg" alt="Hand-decorated strawberry birthday cookies" />
+      <div class="hero-badge">
+        <img src="cookie%20logo.jpg" alt="Cookie Queen logo" />
+        <div>
+          <div class="b-title">The Queen herself</div>
+          <div class="b-sub">Designs · Pipes · Delivers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST ===== -->
+<section class="trust">
+  <div class="container trust-inner">
+    <div class="trust-item">
+      <div class="icon">🎨</div>
+      <h4>Fully Custom</h4>
+      <p>Your colors, your theme</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">🧁</div>
+      <h4>From Scratch</h4>
+      <p>Real butter, real vanilla</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">📦</div>
+      <h4>Ships Nationwide</h4>
+      <p>Local pickup & delivery too</p>
+    </div>
+    <div class="trust-item">
+      <div class="icon">💝</div>
+      <h4>Gift-Ready</h4>
+      <p>Individually wrapped</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<section class="block video-section" id="watch">
+  <div class="container video-grid">
+    <div class="video-copy reveal">
+      <span class="section-eyebrow">Watch us work</span>
+      <h2>See a <span>Cookie Queen</span> design come to life.</h2>
+      <p>Every cookie starts as a blank canvas. Watch a fresh batch get its flood, its piping, and its sparkle — all done by hand in our kitchen.</p>
+      <ul class="video-bullets">
+        <li>Hand-piped royal icing, no shortcuts</li>
+        <li>Bespoke designs matched to your invitation or palette</li>
+        <li>Edible imagery, hand-lettering, gold leaf available</li>
+      </ul>
+      <a href="#order" class="btn btn-primary">Start Your Custom Order →</a>
+    </div>
+    <div class="video-wrap reveal">
+      <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F973565168607979%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFFERINGS ===== -->
+<section class="block" id="offerings">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">What we bake</span>
+      <h2>Cookies for every kind of celebration</h2>
+      <p>Each set is custom-designed for your event. Pick a starting point — we'll handle the rest.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="emoji">🎂</div>
+        <h3>Birthdays & Showers</h3>
+        <p>From "Berry First Birthday" to monogrammed milestones — themed sets that match your décor down to the sprinkles.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">💍</div>
+        <h3>Weddings & Bridal</h3>
+        <p>Hand-lettered favors, monogrammed mini-cookies, and showstopping dessert-table centerpieces.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🏢</div>
+        <h3>Corporate & Branded</h3>
+        <p>Edible logos and gift boxes for client appreciation, launches, and holiday outreach. NDAs available.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🎁</div>
+        <h3>Gift Boxes</h3>
+        <p>Curated assortments, beautifully boxed and shipped fresh — the gift that always lands.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🎄</div>
+        <h3>Holidays & Seasonal</h3>
+        <p>Limited-run sets for every season. Pre-order opens early — book before the calendar fills.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">✨</div>
+        <h3>The Royal Treatment</h3>
+        <p>Our signature, fully bespoke service. Concept call, custom sketches, premium finishes — start to finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURE / GALLERY ===== -->
+<section class="block feature" id="gallery">
+  <div class="container feature-grid">
+    <div class="feature-image reveal">
+      <img src="bg%20cookie%20queen.jpg" alt="Custom decorated strawberry birthday cookies" />
+    </div>
+    <div class="reveal">
+      <span class="section-eyebrow">The Cookie Queen difference</span>
+      <h2>Edible art, designed around you.</h2>
+      <p>Anyone can ice a cookie. We design entire collections — palette, lettering, layout — to match your invitation, your venue, your brand. It's why ours show up on the dessert table and stay there.</p>
+      <div class="feature-list">
+        <div class="row">
+          <div class="num">1</div>
+          <div>
+            <h4>Concept</h4>
+            <p>Share your theme, colors, and inspiration. We sketch a design board for your approval.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="num">2</div>
+          <div>
+            <h4>Craft</h4>
+            <p>Cookies are baked from scratch and decorated by hand — typically 4–7 days before your event.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="num">3</div>
+          <div>
+            <h4>Deliver</h4>
+            <p>Individually wrapped, packaged for travel, and ready to wow on the dessert table.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="block" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">How it works</span>
+      <h2>Ordering is the easy part</h2>
+      <p>Four simple steps from "I have an idea" to "everyone's asking who made these."</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="emoji">📝</div>
+        <h3>1. Tell us about it</h3>
+        <p>Fill out the quote form with your event date, quantity, and any inspiration photos you love.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🎨</div>
+        <h3>2. Approve the design</h3>
+        <p>We send a custom design board with shapes, palette, and pricing — you tweak until it's perfect.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🍪</div>
+        <h3>3. We bake & decorate</h3>
+        <p>Hand-decorated the week of your event so every cookie is at peak freshness.</p>
+      </div>
+      <div class="card reveal">
+        <div class="emoji">🚗</div>
+        <h3>4. Pickup or ship</h3>
+        <p>Local pickup, delivery within the metro, or shipped nationwide with fragile-safe packaging.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="block testimonials" id="reviews" style="background: var(--pink-50);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Happy customers</span>
+      <h2>Loved by hosts, brides & brands</h2>
+      <p>A few notes from the dessert table.</p>
+    </div>
+    <div class="cards">
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The cookies were the centerpiece of my daughter's first birthday — every single guest asked who made them. Worth every penny."</blockquote>
+        <div class="who">
+          <div class="avatar">SM</div>
+          <div><strong>Sarah M.</strong><span>1st Birthday · 60 cookies</span></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"We used Cookie Queen for our corporate launch and the edible logos were perfect. Easy to work with, on time, and stunning."</blockquote>
+        <div class="who">
+          <div class="avatar">JR</div>
+          <div><strong>Jordan R.</strong><span>Brand Activation · 200 cookies</span></div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I cried when I saw my bridal shower cookies. They matched the invitations exactly. They tasted as good as they looked."</blockquote>
+        <div class="who">
+          <div class="avatar">AT</div>
+          <div><strong>Amelia T.</strong><span>Bridal Shower · 48 cookies</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="block">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Good to know</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-wrap">
+      <details class="faq" open>
+        <summary>How far in advance should I order?</summary>
+        <p>For custom sets, 2–4 weeks ahead is ideal. We can sometimes accommodate rush orders within 7 days — message us with your date and we'll do our best.</p>
+      </details>
+      <details class="faq">
+        <summary>What's the minimum order?</summary>
+        <p>Custom sets start at one dozen (12 cookies). For weddings, corporate orders, and shipping, the minimum is two dozen.</p>
+      </details>
+      <details class="faq">
+        <summary>How are cookies priced?</summary>
+        <p>Pricing depends on design complexity, shapes, and quantity. Most custom sets land between $5–$10 per cookie. You'll get an exact quote after submitting the design form — no surprises.</p>
+      </details>
+      <details class="faq">
+        <summary>Do you ship?</summary>
+        <p>Yes. We ship nationwide using insulated, fragile-safe packaging. Local pickup and delivery are also available — details on the order form.</p>
+      </details>
+      <details class="faq">
+        <summary>How long do they stay fresh?</summary>
+        <p>Two weeks at room temperature in their sealed bag. Up to three months frozen. Eat one straight out of the freezer and report back — it's a vibe.</p>
+      </details>
+      <details class="faq">
+        <summary>Allergens?</summary>
+        <p>Our cookies contain wheat, dairy, and egg. We bake in a kitchen that also handles nuts. Let us know about allergies and we'll guide you on what we can safely accommodate.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<div class="cta-banner reveal" id="order">
+  <h2>Ready to make it <span>unforgettable?</span></h2>
+  <p>Tell us about your event. We'll come back within one business day with sketches and a quote.</p>
+  <a href="mailto:hello@gourmetcookiequeen.com?subject=Custom%20Cookie%20Order&body=Event%20type%3A%20%0AEvent%20date%3A%20%0AQuantity%3A%20%0AColors%2Ftheme%3A%20%0AInspiration%20links%3A%20%0AAnything%20else%3A%20" class="btn btn-primary">Request a Quote →</a>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="cookie%20logo.jpg" alt="Gourmet Cookie Queen logo" />
+          <span>Gourmet Cookie Queen</span>
+        </div>
+        <p>Hand-decorated sugar cookies for the moments that matter. Made from scratch, designed around you.</p>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="#offerings">Custom Sets</a></li>
+          <li><a href="#offerings">Gift Boxes</a></li>
+          <li><a href="#offerings">Corporate</a></li>
+          <li><a href="#offerings">Weddings</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#order">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <ul>
+          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      © <span id="year"></span> Gourmet Cookie Queen. All rights reserved. Made with butter, sugar, and love.
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  const body = document.body;
+  const closeNav = () => {
+    body.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+  navToggle.addEventListener('click', () => {
+    const open = body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  // Close on resize back to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760 && body.classList.contains('nav-open')) closeNav();
+  });
+
+  // Reveal-on-scroll (disabled when user prefers reduced motion)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
