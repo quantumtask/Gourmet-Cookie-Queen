@@ -417,7 +417,11 @@
     margin-bottom: 10px;
   }
   .card p { color: var(--ink-soft); font-size: 15px; }
+  /* How It Works has 4 cards — fit them in one row on desktop */
+  #how .cards { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  @media (max-width: 1000px) { #how .cards { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 800px) { .cards { grid-template-columns: 1fr; } }
+  @media (max-width: 800px) { #how .cards { grid-template-columns: 1fr; } }
 
   /* ---------- Gallery / Feature image ---------- */
   .feature {
