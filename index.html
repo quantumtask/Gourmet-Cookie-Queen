@@ -255,12 +255,18 @@
     aspect-ratio: 1/1;
     transform: rotate(2deg);
   }
+  .hero-visual .img-clip {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
   .hero-visual img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 32px;
-    box-shadow: var(--shadow);
+    display: block;
   }
   .hero-badge {
     position: absolute;
@@ -513,6 +519,8 @@
 
   /* ---------- CTA banner ---------- */
   .cta-banner {
+    position: relative;
+    overflow: hidden;
     background:
       linear-gradient(135deg, rgba(193,45,111,.94), rgba(236,111,163,.92)),
       url('bg%20cookie%20queen.jpg') center/cover;
@@ -524,6 +532,7 @@
     margin: 0 24px 100px;
     box-shadow: var(--shadow);
   }
+  .cta-banner .sprinkle { opacity: .4; }
   @media (min-width: 1200px) {
     .cta-banner { margin-left: auto; margin-right: auto; }
   }
@@ -572,7 +581,302 @@
   @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 500px) { .foot-grid { grid-template-columns: 1fr; } }
 
-  /* Reveal on scroll */
+  /* ---------- Scroll progress ---------- */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--pink-400), var(--pink-600), var(--gold));
+    z-index: 100;
+    transition: width .08s linear;
+    box-shadow: 0 0 12px rgba(224,70,138,.6);
+  }
+
+  /* ---------- Announcement marquee ---------- */
+  .marquee {
+    background: linear-gradient(90deg, var(--pink-600), var(--pink-500), var(--pink-600));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .4px;
+    overflow: hidden;
+    position: relative;
+    z-index: 49;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    padding: 10px 0;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .marquee-track span::before {
+    content: "✦";
+    color: var(--gold);
+    font-size: 11px;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ---------- Decorative sprinkles ---------- */
+  .sprinkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .sprinkle {
+    position: absolute;
+    width: 14px;
+    height: 5px;
+    border-radius: 999px;
+    opacity: .55;
+    animation: float 12s ease-in-out infinite;
+  }
+  .sprinkle:nth-child(1)  { top: 8%;  left: 12%; background: var(--pink-400); transform: rotate(25deg);  animation-delay: 0s; }
+  .sprinkle:nth-child(2)  { top: 18%; left: 78%; background: var(--gold);     transform: rotate(-12deg); animation-delay: 1.2s; }
+  .sprinkle:nth-child(3)  { top: 62%; left: 6%;  background: var(--pink-300); transform: rotate(60deg);  animation-delay: 2.4s; }
+  .sprinkle:nth-child(4)  { top: 72%; left: 88%; background: var(--pink-500); transform: rotate(-40deg); animation-delay: 3.6s; }
+  .sprinkle:nth-child(5)  { top: 42%; left: 50%; background: var(--gold);     transform: rotate(15deg);  animation-delay: 4.8s; }
+  .sprinkle:nth-child(6)  { top: 88%; left: 30%; background: var(--pink-400); transform: rotate(-70deg); animation-delay: 1.8s; }
+  .sprinkle:nth-child(7)  { top: 30%; left: 35%; background: var(--pink-300); transform: rotate(45deg);  animation-delay: 3.2s; }
+  .sprinkle:nth-child(8)  { top: 55%; left: 70%; background: var(--gold);     transform: rotate(-25deg); animation-delay: 5.5s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); opacity: .4; }
+    50%      { transform: translateY(-20px) rotate(var(--r, 0deg)); opacity: .75; }
+  }
+
+  /* Ken Burns on hero image */
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0,0); }
+    50%  { transform: scale(1.08) translate(-2%, 2%); }
+    100% { transform: scale(1) translate(0,0); }
+  }
+  .hero-visual img { animation: kenburns 18s ease-in-out infinite; }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,8,14,.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity .25s ease;
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; opacity: 1; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    transform: scale(.95);
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .lightbox.open img { transform: scale(1); }
+  .lightbox-close {
+    position: absolute;
+    top: 18px; right: 22px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .2s ease;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,.28); }
+  .zoomable { cursor: zoom-in; }
+
+  /* ---------- Order modal ---------- */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,8,14,.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity .25s ease;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open { display: flex; opacity: 1; }
+  .modal {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px 36px 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    transform: translateY(20px) scale(.96);
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.2);
+    position: relative;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 36px; height: 36px;
+    border: 0;
+    background: var(--pink-50);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--pink-600);
+    display: grid; place-items: center;
+  }
+  .modal-close:hover { background: var(--pink-100); }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .modal h3 .accent { color: var(--pink-500); font-family: 'Dancing Script', cursive; font-size: 1.1em; }
+  .modal .sub { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 24px; }
+  .field { display: block; margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--pink-100);
+    border-radius: 12px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--pink-400);
+    box-shadow: 0 0 0 4px rgba(244,158,192,.25);
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row-2 .field { margin-bottom: 0; }
+  .modal .btn-primary { width: 100%; justify-content: center; margin-top: 8px; }
+  .modal-note {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 14px;
+  }
+  .form-success {
+    text-align: center;
+    padding: 12px 0;
+  }
+  .form-success .check {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-400), var(--pink-600));
+    color: #fff;
+    font-size: 32px;
+    display: grid; place-items: center;
+    margin: 0 auto 16px;
+  }
+
+  /* ---------- Floating mobile CTA (FAB) ---------- */
+  .fab {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 60;
+    display: none;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 16px 36px -8px rgba(224,70,138,.7);
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+  .fab:hover { transform: translateY(-2px); box-shadow: 0 20px 42px -8px rgba(224,70,138,.85); }
+  .fab.hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
+  @media (max-width: 760px) { .fab { display: inline-flex; } }
+
+  /* ---------- Scallop divider (baked-goods feel) ---------- */
+  .scallop {
+    display: block;
+    width: 100%;
+    height: 28px;
+    background:
+      radial-gradient(circle at 14px 0, transparent 14px, var(--cream) 14.5px);
+    background-size: 28px 28px;
+    background-position: 0 -14px;
+  }
+  .scallop.invert {
+    background: radial-gradient(circle at 14px 28px, transparent 14px, var(--cream) 14.5px);
+    background-size: 28px 28px;
+    background-position: 0 14px;
+  }
+  .scallop.pink {
+    background: radial-gradient(circle at 14px 0, transparent 14px, var(--pink-50) 14.5px);
+    background-size: 28px 28px;
+  }
+
+  /* Card hover polish */
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(244,158,192,0), rgba(224,70,138,.25));
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  .card:hover::after { opacity: 1; mix-blend-mode: multiply; }
+
+  /* Counter animation helper */
+  .counter { display: inline-block; }
+
+  /* ---------- Reveal on scroll ---------- */
   .reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -604,7 +908,7 @@
     .eyebrow { font-size: 11.5px; padding: 7px 14px; letter-spacing: 1px; }
 
     .hero-visual { max-width: 100%; }
-    .hero-visual img { border-radius: 24px; }
+    .hero-visual .img-clip { border-radius: 24px; }
     .hero-badge {
       bottom: -16px;
       left: 50%;
@@ -691,6 +995,25 @@
     .foot-grid { gap: 28px; margin-bottom: 32px; }
     .foot-brand img { width: 44px; height: 44px; }
     .foot-brand span { font-size: 18px; }
+
+    /* Marquee — smaller on phones */
+    .marquee { font-size: 12px; }
+    .marquee-track { gap: 36px; padding: 8px 0; animation-duration: 24s; }
+
+    /* Modal — phone-friendly */
+    .modal { padding: 28px 22px 22px; border-radius: 20px; }
+    .modal h3 { font-size: 24px; }
+    .modal .sub { font-size: 13.5px; margin-bottom: 18px; }
+    .row-2 { grid-template-columns: 1fr; gap: 0; }
+    .row-2 .field { margin-bottom: 14px; }
+    .row-2 .field:last-child { margin-bottom: 0; }
+    .field input, .field select, .field textarea { font-size: 16px; padding: 12px 13px; } /* 16px prevents iOS zoom on focus */
+
+    /* Lightbox close — easier tap on phones */
+    .lightbox-close { top: 12px; right: 12px; }
+
+    /* FAB — leave room above thumb */
+    .fab { right: 14px; bottom: 14px; padding: 13px 20px; font-size: 14.5px; }
   }
 
   /* Very small phones (iPhone SE, etc.) */
@@ -715,6 +1038,23 @@
 </head>
 <body>
 
+<!-- Scroll progress -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- Announcement bar -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Now booking summer 2026 events</span>
+    <span>Free local delivery on orders over $100</span>
+    <span>Ships fresh nationwide in 2 business days</span>
+    <span>Custom designs · 100% from scratch</span>
+    <span>Now booking summer 2026 events</span>
+    <span>Free local delivery on orders over $100</span>
+    <span>Ships fresh nationwide in 2 business days</span>
+    <span>Custom designs · 100% from scratch</span>
+  </div>
+</div>
+
 <!-- ===== NAV ===== -->
 <header class="nav">
   <div class="nav-inner">
@@ -737,7 +1077,11 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
-  <div class="container hero-grid">
+  <div class="sprinkles" aria-hidden="true">
+    <span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span>
+    <span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span>
+  </div>
+  <div class="container hero-grid" style="position:relative; z-index:1;">
     <div>
       <span class="eyebrow"><span class="dot"></span> Hand-decorated · Made fresh to order</span>
       <h1>Cookies <span class="script">almost</span> too pretty to eat.</h1>
@@ -745,18 +1089,20 @@
         Custom sugar cookies designed for your moment — birthdays, baby showers, weddings, and brand activations. Every detail piped by hand, every bite worth the occasion.
       </p>
       <div class="hero-ctas">
-        <a href="#order" class="btn btn-primary">Request a Quote →</a>
+        <button type="button" class="btn btn-primary" data-open-modal>Request a Quote →</button>
         <a href="#gallery" class="btn btn-ghost">See the Gallery</a>
       </div>
       <div class="hero-meta">
-        <div><strong>500+</strong><span>Events Served</span></div>
-        <div><strong>4.9★</strong><span>Average Review</span></div>
-        <div><strong>100%</strong><span>Made From Scratch</span></div>
+        <div><strong><span class="counter" data-to="500" data-suffix="+">0</span></strong><span>Events Served</span></div>
+        <div><strong><span class="counter" data-to="4.9" data-decimals="1" data-suffix="★">0</span></strong><span>Average Review</span></div>
+        <div><strong><span class="counter" data-to="100" data-suffix="%">0</span></strong><span>Made From Scratch</span></div>
       </div>
     </div>
 
     <div class="hero-visual">
-      <img src="bg%20cookie%20queen.jpg" alt="Hand-decorated strawberry birthday cookies" />
+      <div class="img-clip">
+        <img src="bg%20cookie%20queen.jpg" alt="Hand-decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox />
+      </div>
       <div class="hero-badge">
         <img src="cookie%20logo.jpg" alt="Cookie Queen logo" />
         <div>
@@ -806,7 +1152,7 @@
         <li>Bespoke designs matched to your invitation or palette</li>
         <li>Edible imagery, hand-lettering, gold leaf available</li>
       </ul>
-      <a href="#order" class="btn btn-primary">Start Your Custom Order →</a>
+      <button type="button" class="btn btn-primary" data-open-modal>Start Your Custom Order →</button>
     </div>
     <div class="video-wrap reveal">
       <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F973565168607979%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
@@ -861,7 +1207,7 @@
 <section class="block feature" id="gallery">
   <div class="container feature-grid">
     <div class="feature-image reveal">
-      <img src="bg%20cookie%20queen.jpg" alt="Custom decorated strawberry birthday cookies" />
+      <img src="bg%20cookie%20queen.jpg" alt="Custom decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox />
     </div>
     <div class="reveal">
       <span class="section-eyebrow">The Cookie Queen difference</span>
@@ -1002,9 +1348,15 @@
 
 <!-- ===== CTA BANNER ===== -->
 <div class="cta-banner reveal" id="order">
-  <h2>Ready to make it <span>unforgettable?</span></h2>
-  <p>Tell us about your event. We'll come back within one business day with sketches and a quote.</p>
-  <a href="mailto:hello@gourmetcookiequeen.com?subject=Custom%20Cookie%20Order&body=Event%20type%3A%20%0AEvent%20date%3A%20%0AQuantity%3A%20%0AColors%2Ftheme%3A%20%0AInspiration%20links%3A%20%0AAnything%20else%3A%20" class="btn btn-primary">Request a Quote →</a>
+  <div class="sprinkles" aria-hidden="true">
+    <span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span>
+    <span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span><span class="sprinkle"></span>
+  </div>
+  <div style="position:relative; z-index:1;">
+    <h2>Ready to make it <span>unforgettable?</span></h2>
+    <p>Tell us about your event. We'll come back within one business day with sketches and a quote.</p>
+    <button type="button" class="btn btn-primary" data-open-modal>Request a Quote →</button>
+  </div>
 </div>
 
 <!-- ===== FOOTER ===== -->
@@ -1050,10 +1402,87 @@
   </div>
 </footer>
 
+<!-- ===== Floating mobile CTA ===== -->
+<button type="button" class="fab" id="fab" data-open-modal aria-label="Order cookies">
+  <span style="font-size:18px;">🍪</span> Order Now
+</button>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" class="lightbox-close" aria-label="Close" id="lightbox-close">✕</button>
+  <img src="" alt="" id="lightbox-img" />
+</div>
+
+<!-- ===== Order modal ===== -->
+<div class="modal-backdrop" id="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+  <div class="modal">
+    <button type="button" class="modal-close" aria-label="Close" id="modal-close">✕</button>
+    <div id="modal-form-wrap">
+      <h3 id="modal-title">Let's make something <span class="accent">sweet</span></h3>
+      <p class="sub">Tell us about your event — we'll come back within one business day with sketches and a quote.</p>
+      <form id="order-form" novalidate>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-date">Event date</label>
+            <input id="f-date" name="date" type="date" required />
+          </div>
+          <div class="field">
+            <label for="f-qty">Quantity</label>
+            <select id="f-qty" name="quantity" required>
+              <option value="">Select…</option>
+              <option>1 dozen (12)</option>
+              <option>2 dozen (24)</option>
+              <option>3 dozen (36)</option>
+              <option>4 dozen (48)</option>
+              <option>5+ dozen</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-occasion">Occasion</label>
+          <select id="f-occasion" name="occasion" required>
+            <option value="">Select…</option>
+            <option>Birthday</option>
+            <option>Baby shower</option>
+            <option>Bridal shower / Wedding</option>
+            <option>Corporate / Branded</option>
+            <option>Holiday / Seasonal</option>
+            <option>Gift box</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-details">Theme, colors, inspiration</label>
+          <textarea id="f-details" name="details" placeholder="e.g. 'Strawberry first birthday — pink, red, white, gold accents. Will send Pinterest board.'"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Request →</button>
+        <p class="modal-note">Or email us directly: hello@gourmetcookiequeen.com</p>
+      </form>
+    </div>
+    <div id="modal-success" class="form-success" style="display:none;">
+      <div class="check">✓</div>
+      <h3>Request sent!</h3>
+      <p class="sub" style="margin:8px 0 20px;">Your email app will open in a new tab with everything pre-filled. We'll be in touch within one business day.</p>
+      <button type="button" class="btn btn-primary" id="modal-success-close">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile nav toggle
+  /* ===== Mobile nav toggle ===== */
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.getElementById('nav-links');
   const body = document.body;
@@ -1066,13 +1495,35 @@
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
-  // Close on resize back to desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth > 760 && body.classList.contains('nav-open')) closeNav();
   });
 
-  // Reveal-on-scroll (disabled when user prefers reduced motion)
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  /* ===== Scroll progress ===== */
+  const progress = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ===== Floating CTA show/hide ===== */
+  const fab = document.getElementById('fab');
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    // hide near top, hide when scrolling up fast, show otherwise
+    if (y < 500) fab.classList.add('hidden');
+    else fab.classList.remove('hidden');
+    lastY = y;
+  }, { passive: true });
+  fab.classList.add('hidden');
+
+  /* ===== Reveal on scroll ===== */
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1085,6 +1536,117 @@
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
   }
+
+  /* ===== Animated counters ===== */
+  const animateCounter = (el) => {
+    const target = parseFloat(el.dataset.to);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const startTime = performance.now();
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+    const tick = (now) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      const v = target * easeOut(t);
+      el.textContent = v.toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(decimals) + suffix;
+    };
+    requestAnimationFrame(tick);
+  };
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(c => {
+    if (prefersReduced) {
+      const t = parseFloat(c.dataset.to);
+      const d = parseInt(c.dataset.decimals || '0', 10);
+      c.textContent = t.toFixed(d) + (c.dataset.suffix || '');
+    } else {
+      counterObserver.observe(c);
+    }
+  });
+
+  /* ===== Lightbox ===== */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const openLightbox = (src, alt) => {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+  };
+  const closeLightbox = () => {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+  };
+  document.querySelectorAll('[data-lightbox]').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  /* ===== Order modal ===== */
+  const modal = document.getElementById('modal');
+  const openModal = () => {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('f-name').focus(), 300);
+  };
+  const closeModal = () => {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+  };
+  document.querySelectorAll('[data-open-modal]').forEach(b => b.addEventListener('click', openModal));
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (lightbox.classList.contains('open')) closeLightbox();
+      if (modal.classList.contains('open')) closeModal();
+    }
+  });
+
+  /* ===== Order form submit — opens email client pre-filled ===== */
+  const form = document.getElementById('order-form');
+  const formWrap = document.getElementById('modal-form-wrap');
+  const success = document.getElementById('modal-success');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const v = id => document.getElementById(id).value.trim();
+    const subject = encodeURIComponent(`Cookie order — ${v('f-occasion')} (${v('f-date')})`);
+    const body = encodeURIComponent(
+`Name: ${v('f-name')}
+Email: ${v('f-email')}
+Event date: ${v('f-date')}
+Quantity: ${v('f-qty')}
+Occasion: ${v('f-occasion')}
+
+Details / theme / colors / inspiration:
+${v('f-details') || '—'}
+`);
+    window.location.href = `mailto:hello@gourmetcookiequeen.com?subject=${subject}&body=${body}`;
+    formWrap.style.display = 'none';
+    success.style.display = 'block';
+  });
+  document.getElementById('modal-success-close').addEventListener('click', () => {
+    closeModal();
+    setTimeout(() => {
+      formWrap.style.display = '';
+      success.style.display = 'none';
+      form.reset();
+    }, 300);
+  });
 </script>
 
 </body>
