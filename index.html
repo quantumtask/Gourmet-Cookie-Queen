@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="boot">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1238,13 +1238,91 @@
     .insta-posts { gap: 24px; max-width: 480px; margin-bottom: 40px; }
   }
 
-  /* ---------- Reveal on scroll ---------- */
-  .reveal {
+  /* ---------- First-paint fade ---------- */
+  html.boot body {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .8s ease, transform .8s ease;
   }
-  .reveal.in { opacity: 1; transform: none; }
+  body {
+    opacity: 1;
+    transition: opacity .5s ease;
+  }
+
+  /* ---------- Reveal on scroll (directional variants + stagger) ---------- */
+  .reveal,
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-fade {
+    opacity: 0;
+    will-change: opacity, transform;
+    transition:
+      opacity .7s cubic-bezier(.22,.61,.36,1),
+      transform .7s cubic-bezier(.22,.61,.36,1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .reveal, .reveal-up   { transform: translate3d(0, 24px, 0); }
+  .reveal-left          { transform: translate3d(-32px, 0, 0); }
+  .reveal-right         { transform: translate3d(32px, 0, 0); }
+  .reveal-scale         { transform: scale(.94); }
+  .reveal-fade          { transform: none; }
+  .reveal.in,
+  .reveal-up.in,
+  .reveal-left.in,
+  .reveal-right.in,
+  .reveal-scale.in,
+  .reveal-fade.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- Button shimmer ---------- */
+  .btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255,255,255,.28) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform .9s cubic-bezier(.22,.61,.36,1);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .btn-primary:hover::before { transform: translateX(100%); }
+
+  /* ---------- Card lift refinement ---------- */
+  .card {
+    transition:
+      transform .35s cubic-bezier(.22,.61,.36,1),
+      box-shadow .35s cubic-bezier(.22,.61,.36,1),
+      border-color .35s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 40px -18px rgba(193,45,111,.35);
+    border-color: var(--pink-200);
+  }
+
+  /* ---------- Reduced-motion: kill all of it ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade {
+      opacity: 1; transform: none;
+    }
+    .hero-visual img { animation: none; }
+    .sprinkle { animation: none; }
+    .marquee-track { animation: none; }
+  }
 
   /* =========================================================
      MOBILE OVERRIDES — phones (<=760px) and very small (<=420px)
@@ -1493,7 +1571,7 @@
 
     <div class="hero-visual">
       <div class="img-clip">
-        <img src="bg%20cookie%20queen.jpg" alt="Hand-decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox />
+        <img src="bg%20cookie%20queen.jpg" alt="Hand-decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox fetchpriority="high" decoding="async" />
       </div>
       <div class="hero-badge">
         <img src="cookie%20logo.jpg" alt="Cookie Queen logo" />
@@ -1572,10 +1650,10 @@
 <!-- ===== PRODUCT: DIY KITS ===== -->
 <section class="block product-section" id="diy-kits">
   <div class="container product-grid">
-    <div class="product-visual reveal">
+    <div class="product-visual reveal-left">
       <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
     </div>
-    <div class="product-content reveal">
+    <div class="product-content reveal-right">
       <span class="section-eyebrow">DIY Decorating Kits</span>
       <h2>You bring the friends.<br /><span class="accent">We bring the cookies.</span></h2>
       <p>Everything you need to host a decorating party — without the baking. Each kit ships with plain, ready-to-decorate cookies, royal icing in piping bottles, sprinkles, and a step-by-step guide. Pop the bubbly, get the kids around the table, or run it as a team activity.</p>
@@ -1600,10 +1678,10 @@
 <!-- ===== PRODUCT: BOXES OF 6 OR 12 ===== -->
 <section class="block product-section reverse" id="boxes">
   <div class="container product-grid">
-    <div class="product-visual reveal">
+    <div class="product-visual reveal-right">
       <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
     </div>
-    <div class="product-content reveal">
+    <div class="product-content reveal-left">
       <span class="section-eyebrow">Boxes of 6 or 12</span>
       <h2>Ready to give. <span class="accent">Ready to eat.</span></h2>
       <p>Our most-loved designs, curated into beautifully presented gift boxes. No occasion needed — though "just because" is one of our favorites. Available across South Africa with pickup or delivery options.</p>
@@ -1639,10 +1717,10 @@
 <!-- ===== PRODUCT: BEGINNER BAKER KITS ===== -->
 <section class="block product-section" id="beginner-kits">
   <div class="container product-grid">
-    <div class="product-visual reveal">
+    <div class="product-visual reveal-left">
       <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
     </div>
-    <div class="product-content reveal">
+    <div class="product-content reveal-right">
       <span class="section-eyebrow">Beginner Baker Kits</span>
       <h2>Learn the craft<br /><span class="accent">from scratch.</span></h2>
       <p>Everything you need to bake AND decorate your own batch — exactly like we do. Whether you're picking up a new hobby or planning a fun afternoon, our kits include pre-measured ingredients, the right tools, and a clear step-by-step guide. By the end, you'll have a tray of cookies you can be proud of.</p>
@@ -1667,10 +1745,10 @@
 <!-- ===== PRODUCT: CUSTOM ORDERS ===== -->
 <section class="block product-section reverse" id="custom-orders">
   <div class="container product-grid">
-    <div class="product-visual reveal">
+    <div class="product-visual reveal-right">
       <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
     </div>
-    <div class="product-content reveal">
+    <div class="product-content reveal-left">
       <span class="section-eyebrow">Custom Orders</span>
       <h2>Cookies designed<br /><span class="accent">just for you.</span></h2>
       <p>Fully bespoke event cookies — your colors, your theme, your moment. We design from your invitation, your brand palette, or a Pinterest board you love. From the first sketch to the final piped detail, every cookie is made by hand for your day.</p>
@@ -1692,8 +1770,8 @@
 <!-- ===== FEATURE / GALLERY ===== -->
 <section class="block feature" id="gallery">
   <div class="container feature-grid">
-    <div class="feature-image reveal">
-      <img src="bg%20cookie%20queen.jpg" alt="Custom decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox />
+    <div class="feature-image reveal-left">
+      <img src="bg%20cookie%20queen.jpg" alt="Custom decorated strawberry birthday cookies — click to enlarge" class="zoomable" data-lightbox loading="lazy" decoding="async" />
     </div>
     <div class="reveal">
       <span class="section-eyebrow">The Cookie Queen difference</span>
@@ -1889,7 +1967,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <img src="cookie%20logo.jpg" alt="Gourmet Cookie Queen logo" />
+          <img src="cookie%20logo.jpg" alt="Gourmet Cookie Queen logo" loading="lazy" decoding="async" />
           <span>Gourmet Cookie Queen</span>
         </div>
         <p>Hand-decorated sugar cookies for the moments that matter. Made from scratch, designed around you.</p>
@@ -2005,6 +2083,15 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ===== Boot fade: remove .boot class when fonts are ready (or after 1.2s fallback) ===== */
+  const removeBootClass = () => document.documentElement.classList.remove('boot');
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(removeBootClass);
+    setTimeout(removeBootClass, 1200); // fallback if fonts hang
+  } else {
+    setTimeout(removeBootClass, 200);
+  }
+
   /* ===== Mobile nav toggle ===== */
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.getElementById('nav-links');
@@ -2044,8 +2131,20 @@
   }, { passive: true });
   fab.classList.add('hidden');
 
-  /* ===== Reveal on scroll ===== */
+  /* ===== Reveal on scroll (with stagger across siblings) ===== */
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const REVEAL_SELECTOR = '.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade';
+  const revealEls = document.querySelectorAll(REVEAL_SELECTOR);
+
+  // Auto-assign --i to siblings inside the same grid/row so they stagger
+  document.querySelectorAll('.cards, .insta-posts, .hero-meta, .trust-inner, .foot-grid').forEach(group => {
+    [...group.children].forEach((child, i) => {
+      if (child.matches(REVEAL_SELECTOR)) {
+        child.style.setProperty('--i', String(Math.min(i, 5)));
+      }
+    });
+  });
+
   if (!prefersReduced) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -2054,10 +2153,10 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
   } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    revealEls.forEach(el => el.classList.add('in'));
   }
 
   /* ===== Animated counters ===== */
