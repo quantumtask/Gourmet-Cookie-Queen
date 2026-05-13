@@ -549,6 +549,25 @@
     font-size: 18px;
     font-weight: 700;
   }
+  .box-pay {
+    margin-top: 14px;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+  .pay-note {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pay-note::before {
+    content: "🔒";
+    font-size: 12px;
+  }
 
   @media (max-width: 900px) {
     .product-section { padding: 64px 0; }
@@ -1569,8 +1588,11 @@
       </ul>
       <div class="product-meta">
         <div class="product-price-large">From <strong>R___</strong></div>
-        <button type="button" class="btn btn-primary" data-open-modal>Order a DIY Kit →</button>
+        <!-- TODO: replace href with your Yoco/PayFast payment link for DIY Kits -->
+        <a href="https://pay.yoco.com/REPLACE_WITH_DIY_KIT_LINK" target="_blank" rel="noopener" class="btn btn-primary">Pay Now →</a>
+        <button type="button" class="btn btn-ghost" data-open-modal>Ask a Question</button>
       </div>
+      <p class="pay-note">Secure card payment via Yoco. You'll get an order confirmation by email.</p>
     </div>
   </div>
 </section>
@@ -1590,11 +1612,15 @@
           <div class="box-size">Box of 6</div>
           <div class="box-desc">Perfect taster or thank-you gift</div>
           <div class="box-price">From <strong>R___</strong></div>
+          <!-- TODO: replace href with your Yoco/PayFast payment link for Box of 6 -->
+          <a href="https://pay.yoco.com/REPLACE_WITH_BOX_OF_6_LINK" target="_blank" rel="noopener" class="btn btn-primary box-pay">Pay for Box of 6 →</a>
         </div>
         <div class="box-option">
           <div class="box-size">Box of 12</div>
           <div class="box-desc">Generous gifting or a sweet treat for the family</div>
           <div class="box-price">From <strong>R___</strong></div>
+          <!-- TODO: replace href with your Yoco/PayFast payment link for Box of 12 -->
+          <a href="https://pay.yoco.com/REPLACE_WITH_BOX_OF_12_LINK" target="_blank" rel="noopener" class="btn btn-primary box-pay">Pay for Box of 12 →</a>
         </div>
       </div>
       <ul class="product-features">
@@ -1603,8 +1629,9 @@
         <li>Pickup available · Delivery across SA</li>
       </ul>
       <div class="product-meta">
-        <button type="button" class="btn btn-primary" data-open-modal>Order a Box →</button>
+        <button type="button" class="btn btn-ghost" data-open-modal>Ask a Question</button>
       </div>
+      <p class="pay-note">Secure card payment via Yoco. You'll get an order confirmation by email.</p>
     </div>
   </div>
 </section>
@@ -1628,8 +1655,11 @@
       </ul>
       <div class="product-meta">
         <div class="product-price-large">From <strong>R___</strong></div>
-        <button type="button" class="btn btn-primary" data-open-modal>Order a Beginner Kit →</button>
+        <!-- TODO: replace href with your Yoco/PayFast payment link for Beginner Baker Kit -->
+        <a href="https://pay.yoco.com/REPLACE_WITH_BEGINNER_KIT_LINK" target="_blank" rel="noopener" class="btn btn-primary">Pay Now →</a>
+        <button type="button" class="btn btn-ghost" data-open-modal>Ask a Question</button>
       </div>
+      <p class="pay-note">Secure card payment via Yoco. You'll get an order confirmation by email.</p>
     </div>
   </div>
 </section>
