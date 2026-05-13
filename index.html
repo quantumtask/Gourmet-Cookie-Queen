@@ -1068,12 +1068,41 @@
     .video-wrap { padding: 10px; border-radius: 22px; }
     .video-wrap iframe { border-radius: 14px; }
 
-    /* Cards */
-    .cards { gap: 16px; }
-    .card { padding: 24px 22px; border-radius: 20px; }
-    .card .emoji { width: 60px; height: 60px; font-size: 30px; border-radius: 16px; margin-bottom: 16px; }
-    .card h3 { font-size: 19px; }
-    .card p { font-size: 14.5px; }
+    /* Cards — compact, emoji inline with title for a calmer stack */
+    .cards { gap: 12px; }
+    .card {
+      padding: 18px 18px;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 14px;
+      row-gap: 4px;
+      align-items: center;
+    }
+    .card .emoji {
+      width: 44px;
+      height: 44px;
+      font-size: 22px;
+      border-radius: 12px;
+      margin: 0;
+      grid-row: 1;
+      grid-column: 1;
+    }
+    .card h3 {
+      font-size: 17px;
+      grid-row: 1;
+      grid-column: 2;
+      margin: 0;
+    }
+    .card p {
+      font-size: 14px;
+      line-height: 1.5;
+      grid-row: 2;
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      color: var(--ink-soft);
+    }
 
     /* Feature block */
     .feature-grid { gap: 32px; }
@@ -1250,8 +1279,8 @@
     </div>
     <div class="trust-item">
       <div class="icon">🧁</div>
-      <h4>From Scratch</h4>
-      <p>Real butter, real vanilla</p>
+      <h4>Made Fresh</h4>
+      <p>Baked the week of your event</p>
     </div>
     <div class="trust-item">
       <div class="icon">📦</div>
@@ -1561,7 +1590,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      © <span id="year"></span> Gourmet Cookie Queen. All rights reserved. Made with butter, sugar, and love.
+      © <span id="year"></span> Gourmet Cookie Queen. All rights reserved. Made with sweetness and love.
     </div>
   </div>
 </footer>
