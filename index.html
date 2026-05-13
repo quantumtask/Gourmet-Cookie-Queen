@@ -418,6 +418,150 @@
   }
   .card p { color: var(--ink-soft); font-size: 15px; }
 
+  /* Overview cards as clickable links to product sections */
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card-link .card-cta {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--pink-600);
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1.5px solid var(--pink-200);
+    padding-bottom: 2px;
+    transition: border-color .2s ease;
+  }
+  .card-link:hover .card-cta { border-color: var(--pink-500); }
+
+  /* ---------- Product sections ---------- */
+  .product-section { padding: 90px 0; }
+  .product-section.reverse { background: var(--pink-50); }
+  .product-section .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .product-section.reverse .product-visual { order: 2; }
+  .product-section.reverse .product-content { order: 1; }
+  .product-photo {
+    aspect-ratio: 4 / 3;
+    margin: 0;
+    border-radius: 24px;
+  }
+  .product-content .section-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .product-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .product-content h2 .accent {
+    font-family: 'Dancing Script', cursive;
+    color: var(--pink-500);
+    font-weight: 700;
+  }
+  .product-content > p {
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    margin-bottom: 24px;
+  }
+  .product-features {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin: 0 0 28px;
+    padding: 0;
+  }
+  .product-features li {
+    position: relative;
+    padding-left: 28px;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .product-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: var(--pink-100);
+    color: var(--pink-600);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .product-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .product-price-large {
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .product-price-large strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--pink-600);
+    font-weight: 700;
+    margin-left: 4px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .box-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .box-option {
+    background: #fff;
+    border: 1px solid var(--pink-100);
+    border-radius: 16px;
+    padding: 18px 18px;
+  }
+  .box-size {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .box-desc { font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; }
+  .box-price { font-size: 13px; color: var(--ink-soft); }
+  .box-price strong {
+    font-family: 'Playfair Display', serif;
+    color: var(--pink-600);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .product-section { padding: 64px 0; }
+    .product-section .product-grid { grid-template-columns: 1fr; gap: 32px; }
+    .product-section.reverse .product-visual { order: 0; }
+    .product-section.reverse .product-content { order: 0; }
+    .product-content h2 { font-size: clamp(26px, 6vw, 36px); }
+    .product-meta .btn { width: 100%; justify-content: center; }
+    .product-meta { flex-direction: column; align-items: stretch; gap: 16px; }
+    .product-price-large { text-align: center; }
+    .box-options { grid-template-columns: 1fr; }
+  }
+
   /* Photo placeholder at top of card */
   .card-photo {
     aspect-ratio: 4 / 3;
@@ -1378,52 +1522,138 @@
       <p>From ready-to-gift boxes to decorate-yourself kits — pick the experience you're after.</p>
     </div>
     <div class="cards">
-      <div class="card reveal">
-        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
+      <a class="card card-link reveal" href="#diy-kits">
         <div class="emoji">🎨</div>
         <h3>DIY Decorating Kits</h3>
-        <p>Plain baked cookies, royal icing in piping bottles, and sprinkles — you do the decorating at home. Perfect for kids' parties, date nights, and team events.</p>
-        <div class="card-price">From <strong>R___</strong></div>
-        <details class="card-details">
-          <summary>What's inside</summary>
-          <ul>
-            <li>Plain baked sugar cookies (___ pieces)</li>
-            <li>Royal icing piping bottles (___ colors)</li>
-            <li>Assorted sprinkles & decorations</li>
-            <li>Step-by-step decorating guide</li>
-          </ul>
-        </details>
-      </div>
-      <div class="card reveal">
-        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
+        <p>You decorate at home — cookies, icing, sprinkles included.</p>
+        <span class="card-cta">See more →</span>
+      </a>
+      <a class="card card-link reveal" href="#boxes">
         <div class="emoji">📦</div>
         <h3>Boxes of 6 or 12</h3>
-        <p>Curated, ready-to-eat selections of our most-loved designs. Order a 6-pack or a 12-pack — pickup or delivery across South Africa.</p>
-        <div class="card-price">Box of 6 from <strong>R___</strong> · Box of 12 from <strong>R___</strong></div>
-      </div>
-      <div class="card reveal">
-        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
+        <p>Ready-to-eat curated boxes, pickup or delivery in SA.</p>
+        <span class="card-cta">See more →</span>
+      </a>
+      <a class="card card-link reveal" href="#beginner-kits">
         <div class="emoji">🍳</div>
         <h3>Beginner Baker Kits</h3>
-        <p>Learn how we do it. Recipe card, sugar cookie mix, royal icing pack, and a step-by-step guide. Bake and decorate your own batch from scratch.</p>
-        <div class="card-price">From <strong>R___</strong></div>
-        <details class="card-details">
-          <summary>What's inside</summary>
-          <ul>
-            <li>Pre-measured sugar cookie dry mix</li>
-            <li>Royal icing powder pack</li>
-            <li>Cookie cutter(s)</li>
-            <li>Recipe card + step-by-step guide</li>
-            <li>Piping bag & decorating tips</li>
-          </ul>
-        </details>
-      </div>
-      <div class="card reveal">
-        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
+        <p>Learn to bake & decorate — mix, icing, tools, and guide.</p>
+        <span class="card-cta">See more →</span>
+      </a>
+      <a class="card card-link reveal" href="#custom-orders">
         <div class="emoji">✨</div>
         <h3>Custom Orders</h3>
-        <p>Fully bespoke event cookies — your colors, your theme, your moment. Birthdays, weddings, baby showers, corporate launches. Quotes within one business day.</p>
-        <div class="card-price">From <strong>R___</strong> per cookie</div>
+        <p>Fully bespoke event cookies — your colors, your theme.</p>
+        <span class="card-cta">See more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT: DIY KITS ===== -->
+<section class="block product-section" id="diy-kits">
+  <div class="container product-grid">
+    <div class="product-visual reveal">
+      <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
+    </div>
+    <div class="product-content reveal">
+      <span class="section-eyebrow">DIY Decorating Kits</span>
+      <h2>You bring the friends.<br /><span class="accent">We bring the cookies.</span></h2>
+      <p>Everything you need to host a decorating party — without the baking. Each kit ships with plain, ready-to-decorate cookies, royal icing in piping bottles, sprinkles, and a step-by-step guide. Pop the bubbly, get the kids around the table, or run it as a team activity.</p>
+      <ul class="product-features">
+        <li>Plain baked sugar cookies (___ pieces)</li>
+        <li>Royal icing piping bottles in ___ colors</li>
+        <li>Assorted sprinkles & decorations</li>
+        <li>Step-by-step decorating guide</li>
+        <li>Great for kids' parties · date nights · team events</li>
+      </ul>
+      <div class="product-meta">
+        <div class="product-price-large">From <strong>R___</strong></div>
+        <button type="button" class="btn btn-primary" data-open-modal>Order a DIY Kit →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT: BOXES OF 6 OR 12 ===== -->
+<section class="block product-section reverse" id="boxes">
+  <div class="container product-grid">
+    <div class="product-visual reveal">
+      <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
+    </div>
+    <div class="product-content reveal">
+      <span class="section-eyebrow">Boxes of 6 or 12</span>
+      <h2>Ready to give. <span class="accent">Ready to eat.</span></h2>
+      <p>Our most-loved designs, curated into beautifully presented gift boxes. No occasion needed — though "just because" is one of our favorites. Available across South Africa with pickup or delivery options.</p>
+      <div class="box-options">
+        <div class="box-option">
+          <div class="box-size">Box of 6</div>
+          <div class="box-desc">Perfect taster or thank-you gift</div>
+          <div class="box-price">From <strong>R___</strong></div>
+        </div>
+        <div class="box-option">
+          <div class="box-size">Box of 12</div>
+          <div class="box-desc">Generous gifting or a sweet treat for the family</div>
+          <div class="box-price">From <strong>R___</strong></div>
+        </div>
+      </div>
+      <ul class="product-features">
+        <li>Curated assortment of our seasonal designs</li>
+        <li>Beautifully packaged, gift-ready</li>
+        <li>Pickup available · Delivery across SA</li>
+      </ul>
+      <div class="product-meta">
+        <button type="button" class="btn btn-primary" data-open-modal>Order a Box →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT: BEGINNER BAKER KITS ===== -->
+<section class="block product-section" id="beginner-kits">
+  <div class="container product-grid">
+    <div class="product-visual reveal">
+      <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
+    </div>
+    <div class="product-content reveal">
+      <span class="section-eyebrow">Beginner Baker Kits</span>
+      <h2>Learn the craft<br /><span class="accent">from scratch.</span></h2>
+      <p>Everything you need to bake AND decorate your own batch — exactly like we do. Whether you're picking up a new hobby or planning a fun afternoon, our kits include pre-measured ingredients, the right tools, and a clear step-by-step guide. By the end, you'll have a tray of cookies you can be proud of.</p>
+      <ul class="product-features">
+        <li>Pre-measured sugar cookie dry mix</li>
+        <li>Royal icing powder pack</li>
+        <li>Cookie cutter(s)</li>
+        <li>Recipe card + step-by-step guide</li>
+        <li>Piping bag & decorating tips</li>
+      </ul>
+      <div class="product-meta">
+        <div class="product-price-large">From <strong>R___</strong></div>
+        <button type="button" class="btn btn-primary" data-open-modal>Order a Beginner Kit →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT: CUSTOM ORDERS ===== -->
+<section class="block product-section reverse" id="custom-orders">
+  <div class="container product-grid">
+    <div class="product-visual reveal">
+      <div class="card-photo product-photo" data-placeholder>📷 Photo coming soon</div>
+    </div>
+    <div class="product-content reveal">
+      <span class="section-eyebrow">Custom Orders</span>
+      <h2>Cookies designed<br /><span class="accent">just for you.</span></h2>
+      <p>Fully bespoke event cookies — your colors, your theme, your moment. We design from your invitation, your brand palette, or a Pinterest board you love. From the first sketch to the final piped detail, every cookie is made by hand for your day.</p>
+      <ul class="product-features">
+        <li>Birthdays · Baby showers · Bridal & weddings</li>
+        <li>Corporate launches & branded gifts</li>
+        <li>Holiday & seasonal sets</li>
+        <li>Custom design board sent for approval before baking</li>
+        <li>Quotes within one business day</li>
+      </ul>
+      <div class="product-meta">
+        <div class="product-price-large">From <strong>R___</strong> per cookie</div>
+        <button type="button" class="btn btn-primary" data-open-modal>Request a Custom Quote →</button>
       </div>
     </div>
   </div>
