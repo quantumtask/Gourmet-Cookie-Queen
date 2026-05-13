@@ -112,6 +112,9 @@
   .nav-links a:hover { color: var(--pink-600); }
   .nav-cta { padding: 10px 20px; font-size: 14px; }
 
+  /* Product sub-links only show inside the mobile drawer */
+  .nav-sub { display: none; }
+
   /* Hamburger */
   .nav-toggle {
     display: none;
@@ -176,6 +179,20 @@
       border-bottom: 1px solid var(--pink-100);
     }
     .nav-links a:not(.nav-cta):last-of-type { border-bottom: 0; }
+    .nav-sub {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 4px 12px 18px !important;
+      font-size: 14.5px !important;
+      color: var(--ink-soft) !important;
+      border-bottom: 1px solid var(--pink-50) !important;
+    }
+    .nav-sub::before {
+      content: "→";
+      color: var(--pink-400);
+      font-size: 12px;
+    }
     .nav-links .nav-cta {
       margin-top: 14px;
       justify-content: center;
@@ -1238,6 +1255,31 @@
     .insta-posts { gap: 24px; max-width: 480px; margin-bottom: 40px; }
   }
 
+  /* ---------- Sprinkle burst (fires on order success) ---------- */
+  .burst {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 250;
+  }
+  .burst .b {
+    position: absolute;
+    top: -24px;
+    width: 12px;
+    height: 4px;
+    border-radius: 999px;
+    transform-origin: center;
+    animation: burst-fall var(--d, 1600ms) cubic-bezier(.4,.05,.6,1) var(--delay, 0ms) forwards;
+    opacity: 0;
+  }
+  @keyframes burst-fall {
+    0%   { transform: translate3d(0,0,0) rotate(var(--r, 0deg)); opacity: 0; }
+    8%   { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translate3d(var(--x, 0px), 110vh, 0) rotate(calc(var(--r, 0deg) + 540deg)); opacity: 0; }
+  }
+
   /* ---------- First-paint fade ---------- */
   html.boot body {
     opacity: 0;
@@ -1533,6 +1575,10 @@
     </button>
     <nav class="nav-links" id="nav-links">
       <a href="#offerings">Cookies</a>
+      <a href="#diy-kits" class="nav-sub">DIY Decorating Kits</a>
+      <a href="#boxes" class="nav-sub">Boxes of 6 or 12</a>
+      <a href="#beginner-kits" class="nav-sub">Beginner Baker Kits</a>
+      <a href="#custom-orders" class="nav-sub">Custom Orders</a>
       <a href="#gallery">Gallery</a>
       <a href="#how">How It Works</a>
       <a href="#reviews">Reviews</a>
@@ -2260,7 +2306,37 @@ ${v('f-details') || '—'}
     window.location.href = `mailto:hello@gourmetcookiequeen.com?subject=${subject}&body=${body}`;
     formWrap.style.display = 'none';
     success.style.display = 'block';
+    sprinkleBurst();
   });
+
+  /* ===== Sprinkle burst (fires on order success) ===== */
+  function sprinkleBurst() {
+    if (prefersReduced) return;
+    const colors = ['#ec6fa3', '#e0468a', '#c12d6f', '#f49ec0', '#d4a857', '#fbc9dc'];
+    const layer = document.createElement('div');
+    layer.className = 'burst';
+    document.body.appendChild(layer);
+    const N = 28;
+    for (let i = 0; i < N; i++) {
+      const s = document.createElement('span');
+      s.className = 'b';
+      const left = Math.random() * 100;
+      const drift = (Math.random() - 0.5) * 240;
+      const rot = Math.floor(Math.random() * 360);
+      const dur = 1400 + Math.floor(Math.random() * 900);
+      const delay = Math.floor(Math.random() * 250);
+      s.style.left = left + 'vw';
+      s.style.background = colors[i % colors.length];
+      s.style.setProperty('--x', drift + 'px');
+      s.style.setProperty('--r', rot + 'deg');
+      s.style.setProperty('--d', dur + 'ms');
+      s.style.setProperty('--delay', delay + 'ms');
+      // small chance of being a circle instead of an oval
+      if (Math.random() < 0.18) { s.style.height = '8px'; s.style.width = '8px'; s.style.borderRadius = '50%'; }
+      layer.appendChild(s);
+    }
+    setTimeout(() => layer.remove(), 2800);
+  }
   document.getElementById('modal-success-close').addEventListener('click', () => {
     closeModal();
     setTimeout(() => {
