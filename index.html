@@ -417,11 +417,18 @@
     margin-bottom: 10px;
   }
   .card p { color: var(--ink-soft); font-size: 15px; }
-  /* How It Works has 4 cards — fit them in one row on desktop */
-  #how .cards { grid-template-columns: repeat(4, 1fr); gap: 22px; }
-  @media (max-width: 1000px) { #how .cards { grid-template-columns: repeat(2, 1fr); } }
+  /* Sections with 4 cards — fit them in one row on desktop */
+  #how .cards,
+  #offerings .cards { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  @media (max-width: 1000px) {
+    #how .cards,
+    #offerings .cards { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 800px) { .cards { grid-template-columns: 1fr; } }
-  @media (max-width: 800px) { #how .cards { grid-template-columns: 1fr; } }
+  @media (max-width: 800px) {
+    #how .cards,
+    #offerings .cards { grid-template-columns: 1fr; }
+  }
 
   /* ---------- Gallery / Feature image ---------- */
   .feature {
@@ -1295,64 +1302,34 @@
   </div>
 </section>
 
-<!-- ===== VIDEO ===== -->
-<section class="block video-section" id="watch">
-  <div class="container video-grid">
-    <div class="video-copy reveal">
-      <span class="section-eyebrow">Watch us work</span>
-      <h2>See a <span>Cookie Queen</span> design come to life.</h2>
-      <p>Every cookie starts as a blank canvas. Watch a fresh batch get its flood, its piping, and its sparkle — all done by hand in our kitchen.</p>
-      <ul class="video-bullets">
-        <li>Hand-piped royal icing, no shortcuts</li>
-        <li>Bespoke designs matched to your invitation or palette</li>
-        <li>Edible imagery, hand-lettering, gold leaf available</li>
-      </ul>
-      <button type="button" class="btn btn-primary" data-open-modal>Start Your Custom Order →</button>
-    </div>
-    <div class="video-wrap reveal">
-      <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F973565168607979%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-    </div>
-  </div>
-</section>
-
 <!-- ===== OFFERINGS ===== -->
 <section class="block" id="offerings">
   <div class="container">
     <div class="section-head reveal">
-      <span class="section-eyebrow">What we bake</span>
-      <h2>Cookies for every kind of celebration</h2>
-      <p>Each set is custom-designed for your event. Pick a starting point — we'll handle the rest.</p>
+      <span class="section-eyebrow">What we make</span>
+      <h2>Cookies, kits & boxes</h2>
+      <p>From ready-to-gift boxes to decorate-yourself kits — pick the experience you're after.</p>
     </div>
     <div class="cards">
       <div class="card reveal">
-        <div class="emoji">🎂</div>
-        <h3>Birthdays & Showers</h3>
-        <p>From "Berry First Birthday" to monogrammed milestones — themed sets that match your décor down to the sprinkles.</p>
+        <div class="emoji">🎨</div>
+        <h3>DIY Decorating Kits</h3>
+        <p>Plain baked cookies, royal icing in piping bottles, and sprinkles — you do the decorating at home. Perfect for kids' parties, date nights, and team events.</p>
       </div>
       <div class="card reveal">
-        <div class="emoji">💍</div>
-        <h3>Weddings & Bridal</h3>
-        <p>Hand-lettered favors, monogrammed mini-cookies, and showstopping dessert-table centerpieces.</p>
+        <div class="emoji">📦</div>
+        <h3>Boxes of 6 or 12</h3>
+        <p>Curated, ready-to-eat selections of our most-loved designs. Order a 6-pack or a 12-pack — pickup or delivery across South Africa.</p>
       </div>
       <div class="card reveal">
-        <div class="emoji">🏢</div>
-        <h3>Corporate & Branded</h3>
-        <p>Edible logos and gift boxes for client appreciation, launches, and holiday outreach. NDAs available.</p>
-      </div>
-      <div class="card reveal">
-        <div class="emoji">🎁</div>
-        <h3>Gift Boxes</h3>
-        <p>Curated assortments, beautifully boxed and shipped fresh — the gift that always lands.</p>
-      </div>
-      <div class="card reveal">
-        <div class="emoji">🎄</div>
-        <h3>Holidays & Seasonal</h3>
-        <p>Limited-run sets for every season. Pre-order opens early — book before the calendar fills.</p>
+        <div class="emoji">🍳</div>
+        <h3>Beginner Baker Kits</h3>
+        <p>Learn how we do it. Recipe card, sugar cookie mix, royal icing pack, and a step-by-step guide. Bake and decorate your own batch from scratch.</p>
       </div>
       <div class="card reveal">
         <div class="emoji">✨</div>
-        <h3>The Royal Treatment</h3>
-        <p>Our signature, fully bespoke service. Concept call, custom sketches, premium finishes — start to finish.</p>
+        <h3>Custom Orders</h3>
+        <p>Fully bespoke event cookies — your colors, your theme, your moment. Birthdays, weddings, baby showers, corporate launches. Quotes within one business day.</p>
       </div>
     </div>
   </div>
@@ -1517,7 +1494,7 @@
       </details>
       <details class="faq">
         <summary>What's the minimum order?</summary>
-        <p>Custom sets start at one dozen (12 cookies). For weddings, corporate orders, and shipping, the minimum is two dozen.</p>
+        <p>Boxes start at 6 cookies. DIY kits, beginner kits, and custom orders have no fixed minimum — just message us with what you need.</p>
       </details>
       <details class="faq">
         <summary>How are cookies priced?</summary>
@@ -1624,40 +1601,39 @@
             <input id="f-email" name="email" type="email" required autocomplete="email" />
           </div>
         </div>
+        <div class="field">
+          <label for="f-occasion">What you'd like</label>
+          <select id="f-occasion" name="order_type" required>
+            <option value="">Select…</option>
+            <option>DIY Decorating Kit</option>
+            <option>Box of 6</option>
+            <option>Box of 12</option>
+            <option>Beginner Baker Kit</option>
+            <option>Custom Order (event cookies)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
         <div class="row-2">
           <div class="field">
-            <label for="f-date">Event date</label>
+            <label for="f-date">Date needed</label>
             <input id="f-date" name="date" type="date" required />
           </div>
           <div class="field">
             <label for="f-qty">Quantity</label>
             <select id="f-qty" name="quantity" required>
               <option value="">Select…</option>
-              <option>1 dozen (12)</option>
-              <option>2 dozen (24)</option>
-              <option>3 dozen (36)</option>
-              <option>4 dozen (48)</option>
-              <option>5+ dozen</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5+</option>
               <option>Not sure yet</option>
             </select>
           </div>
         </div>
         <div class="field">
-          <label for="f-occasion">Occasion</label>
-          <select id="f-occasion" name="occasion" required>
-            <option value="">Select…</option>
-            <option>Birthday</option>
-            <option>Baby shower</option>
-            <option>Bridal shower / Wedding</option>
-            <option>Corporate / Branded</option>
-            <option>Holiday / Seasonal</option>
-            <option>Gift box</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-details">Theme, colors, inspiration</label>
-          <textarea id="f-details" name="details" placeholder="e.g. 'Strawberry first birthday — pink, red, white, gold accents. Will send Pinterest board.'"></textarea>
+          <label for="f-details">Details (theme, colors, occasion, anything else)</label>
+          <textarea id="f-details" name="details" placeholder="e.g. 'Box of 12 for my daughter's 5th birthday — pink and gold theme.' Or 'DIY kit for 6 kids, ages 4-7.'"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send Request →</button>
         <p class="modal-note">Prefer to chat? <a href="tel:+27725128815" style="color:var(--pink-600); font-weight:600; text-decoration:none;">Call 072 512 8815</a> · <a href="https://wa.me/27725128815" target="_blank" rel="noopener" style="color:var(--pink-600); font-weight:600; text-decoration:none;">WhatsApp</a></p>
@@ -1821,11 +1797,11 @@
     const body = encodeURIComponent(
 `Name: ${v('f-name')}
 Email: ${v('f-email')}
-Event date: ${v('f-date')}
+Order type: ${v('f-occasion')}
 Quantity: ${v('f-qty')}
-Occasion: ${v('f-occasion')}
+Date needed: ${v('f-date')}
 
-Details / theme / colors / inspiration:
+Details:
 ${v('f-details') || '—'}
 `);
     window.location.href = `mailto:hello@gourmetcookiequeen.com?subject=${subject}&body=${body}`;
