@@ -417,6 +417,84 @@
     margin-bottom: 10px;
   }
   .card p { color: var(--ink-soft); font-size: 15px; }
+
+  /* Photo placeholder at top of card */
+  .card-photo {
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    margin: -8px -8px 18px;
+    background:
+      repeating-linear-gradient(135deg, var(--pink-50) 0 14px, #fff 14px 28px);
+    display: grid;
+    place-items: center;
+    color: var(--pink-400);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    border: 1px dashed var(--pink-200);
+  }
+  /* When data-placeholder is replaced with a real <img>, swap in: */
+  .card-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+
+  /* Price line */
+  .card-price {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--pink-100);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .card-price strong {
+    color: var(--pink-600);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  /* What's inside expander */
+  .card-details {
+    margin-top: 12px;
+    border-top: 1px solid var(--pink-100);
+    padding-top: 12px;
+  }
+  .card-details summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--pink-600);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-details summary::-webkit-details-marker { display: none; }
+  .card-details summary::after {
+    content: "▾";
+    font-size: 11px;
+    transition: transform .2s ease;
+  }
+  .card-details[open] summary::after { transform: rotate(180deg); }
+  .card-details ul {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .card-details li {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .card-details li::before {
+    content: "•";
+    color: var(--pink-400);
+    position: absolute;
+    left: 4px;
+    font-weight: 700;
+  }
   /* Sections with 4 cards — fit them in one row on desktop */
   #how .cards,
   #offerings .cards { grid-template-columns: repeat(4, 1fr); gap: 22px; }
@@ -1075,11 +1153,15 @@
     .video-wrap { padding: 10px; border-radius: 22px; }
     .video-wrap iframe { border-radius: 14px; }
 
-    /* Cards — compact, emoji inline with title for a calmer stack */
+    /* Cards — default mobile: compact padding */
     .cards { gap: 12px; }
-    .card {
-      padding: 18px 18px;
-      border-radius: 16px;
+    .card { padding: 18px 18px; border-radius: 16px; }
+    .card .emoji { width: 44px; height: 44px; font-size: 22px; border-radius: 12px; margin-bottom: 12px; }
+    .card h3 { font-size: 17px; }
+    .card p { font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+
+    /* How It Works — emoji + title inline (no extra elements in those cards) */
+    #how .card {
       display: grid;
       grid-template-columns: auto 1fr;
       grid-template-rows: auto auto;
@@ -1087,29 +1169,14 @@
       row-gap: 4px;
       align-items: center;
     }
-    .card .emoji {
-      width: 44px;
-      height: 44px;
-      font-size: 22px;
-      border-radius: 12px;
-      margin: 0;
-      grid-row: 1;
-      grid-column: 1;
-    }
-    .card h3 {
-      font-size: 17px;
-      grid-row: 1;
-      grid-column: 2;
-      margin: 0;
-    }
-    .card p {
-      font-size: 14px;
-      line-height: 1.5;
-      grid-row: 2;
-      grid-column: 1 / -1;
-      margin-top: 4px;
-      color: var(--ink-soft);
-    }
+    #how .card .emoji { grid-row: 1; grid-column: 1; margin-bottom: 0; }
+    #how .card h3 { grid-row: 1; grid-column: 2; margin: 0; }
+    #how .card p { grid-row: 2; grid-column: 1 / -1; margin-top: 4px; }
+
+    /* Offerings cards — photo placeholder smaller on phones */
+    #offerings .card-photo { margin: -4px -4px 14px; border-radius: 12px; }
+    #offerings .card-price { margin-top: 12px; padding-top: 12px; font-size: 13.5px; }
+    #offerings .card-price strong { font-size: 16px; }
 
     /* Feature block */
     .feature-grid { gap: 32px; }
@@ -1312,24 +1379,51 @@
     </div>
     <div class="cards">
       <div class="card reveal">
+        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
         <div class="emoji">🎨</div>
         <h3>DIY Decorating Kits</h3>
         <p>Plain baked cookies, royal icing in piping bottles, and sprinkles — you do the decorating at home. Perfect for kids' parties, date nights, and team events.</p>
+        <div class="card-price">From <strong>R___</strong></div>
+        <details class="card-details">
+          <summary>What's inside</summary>
+          <ul>
+            <li>Plain baked sugar cookies (___ pieces)</li>
+            <li>Royal icing piping bottles (___ colors)</li>
+            <li>Assorted sprinkles & decorations</li>
+            <li>Step-by-step decorating guide</li>
+          </ul>
+        </details>
       </div>
       <div class="card reveal">
+        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
         <div class="emoji">📦</div>
         <h3>Boxes of 6 or 12</h3>
         <p>Curated, ready-to-eat selections of our most-loved designs. Order a 6-pack or a 12-pack — pickup or delivery across South Africa.</p>
+        <div class="card-price">Box of 6 from <strong>R___</strong> · Box of 12 from <strong>R___</strong></div>
       </div>
       <div class="card reveal">
+        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
         <div class="emoji">🍳</div>
         <h3>Beginner Baker Kits</h3>
         <p>Learn how we do it. Recipe card, sugar cookie mix, royal icing pack, and a step-by-step guide. Bake and decorate your own batch from scratch.</p>
+        <div class="card-price">From <strong>R___</strong></div>
+        <details class="card-details">
+          <summary>What's inside</summary>
+          <ul>
+            <li>Pre-measured sugar cookie dry mix</li>
+            <li>Royal icing powder pack</li>
+            <li>Cookie cutter(s)</li>
+            <li>Recipe card + step-by-step guide</li>
+            <li>Piping bag & decorating tips</li>
+          </ul>
+        </details>
       </div>
       <div class="card reveal">
+        <div class="card-photo" data-placeholder>📷 Photo coming soon</div>
         <div class="emoji">✨</div>
         <h3>Custom Orders</h3>
         <p>Fully bespoke event cookies — your colors, your theme, your moment. Birthdays, weddings, baby showers, corporate launches. Quotes within one business day.</p>
+        <div class="card-price">From <strong>R___</strong> per cookie</div>
       </div>
     </div>
   </div>
@@ -1509,8 +1603,8 @@
         <p>Two weeks at room temperature in their sealed bag. Up to three months frozen. Eat one straight out of the freezer and report back — it's a vibe.</p>
       </details>
       <details class="faq">
-        <summary>Allergens?</summary>
-        <p>Our cookies contain wheat, dairy, and egg. We bake in a kitchen that also handles nuts. Let us know about allergies and we'll guide you on what we can safely accommodate.</p>
+        <summary>Allergens — please read</summary>
+        <p><strong>We don't cater to allergies or specialty diets.</strong> Our cookies contain wheat, dairy, egg, and may contain nuts. Our kitchen handles all common allergens regularly and we can't guarantee any item is allergen-free. If you or your guests have a serious allergy, our cookies are not a safe choice — please don't order.</p>
       </details>
     </div>
   </div>
